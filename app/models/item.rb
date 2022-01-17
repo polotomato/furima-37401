@@ -5,5 +5,6 @@ class Item < ApplicationRecord
              :scheduled_delivery, :shipping_fee_status
   
   # テーブル関連
+  has_one_attached :image
   belongs_to :user
 end
