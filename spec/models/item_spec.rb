@@ -92,6 +92,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Price is not a number"
       end
+      it "userが紐づいてないitemは登録できない" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "User must exist"
+      end
       it "エラーメッセージに重複がない" do
         @item = Item.new
         @item.category_id            = 1
