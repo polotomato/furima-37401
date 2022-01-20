@@ -27,10 +27,10 @@ const pay = () => {
       };
 
       // 入力欄をクリア
-      document.getElementById("order_number").removeAttribute("name");
-      document.getElementById("order_cvc").removeAttribute("name");
-      document.getElementById("order_exp_month").removeAttribute("name");
-      document.getElementById("order_exp_year").removeAttribute("name");
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
 
       // トークンをサーバーサイドへ送信
       document.getElementById("charge-form").submit();
