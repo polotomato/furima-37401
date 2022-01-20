@@ -14,8 +14,8 @@ class PurchaseItem
     validates :city
     validates :address_line
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "is invalid. Input a 10 or 11 digit number" }
-    validates :token
   end
+  validates :token, presence: { message: "is blank. There is something wrong with your credit card" }
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
