@@ -3,7 +3,8 @@ class PurchaseItem
 
   attr_accessor :user_id, :item_id, :postal_code,
                 :prefecture_id, :city, :address_line,
-                :building_name, :phone_number, :purchase_id
+                :building_name, :phone_number, :purchase_id,
+                :token
   
   with_options presence: true do
     validates :user_id
@@ -13,6 +14,19 @@ class PurchaseItem
     validates :city
     validates :address_line
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "is invalid. Input a 10 or 11 digit number" }
-    validates :purchase_id
+    validates :token
+  end
+
+  def save
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
+    Address.create(
+      postal_code: postal_code,
+      prefecture_id: prefecture_id,
+      city: city,
+      address_line: address_line,
+      building_name: building_name,
+      phone_number: phone_number,
+      purchase_id: purchase.id
+    )
   end
 end
