@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :move_wrong_user_to_index, only: [:edit, :destroy]
 
   def index
-    @items = Item.order("created_at DESC")
+    @items = Item.order("created_at DESC").includes(:purchase)
   end
 
   def new
@@ -24,6 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.purchase
+      redirect_to root_path
+    end
   end
 
   def update
@@ -49,7 +52,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:purchase).find(params[:id])
   end
 
   def move_wrong_user_to_index
