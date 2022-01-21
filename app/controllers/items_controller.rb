@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.purchase
+    if @item.purchase.present?
       redirect_to root_path
     end
   end
